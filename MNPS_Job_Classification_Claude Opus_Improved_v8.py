@@ -1,4 +1,14 @@
-# MNPS Job Classification - Improved Two-Pass Approach v8.0
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+      "metadata": {},
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/vanderbilt-data-science/MNPSCollaborative/blob/New-Baseline-v2/mnps_new_baseline%20v7.5.3.ipynb\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>\n",
+    "\n",
+    "---\n",
+    "\n",
+# MNPS Job Classification - Claude Opus Improved Two-Pass Approach v8.0
 # Implements recommendations for better accuracy through enhanced self-consistency
 # and minimal post-processing
 
