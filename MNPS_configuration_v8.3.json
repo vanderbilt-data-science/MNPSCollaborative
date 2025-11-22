@@ -1,0 +1,154 @@
+{
+  "mnps_file_mappings": {
+    "resource_files": {
+      "ksacs": {
+        "expected_name": "MNPS KSACs.csv",
+        "description": "MNPS Knowledge, Skills, Abilities, and Competencies data",
+        "required_columns": ["Role", "KSAC_Text"],
+        "alternative_columns": ["Role", "Competencies", "Skills"]
+      },
+      "salary": {
+        "expected_name": "salary_by_major_role_grouping.csv",
+        "description": "Salary data by major role groupings",
+        "required_columns": ["Major Role Grouping"],
+        "salary_columns": ["Min Annual Salary", "Average Annual Salary", "Max Annual Salary"],
+        "clean_currency": true
+      },
+      "time_correction": {
+        "expected_name": "Time to correct an error in hours.csv",
+        "description": "Time estimates for correcting classification errors",
+        "required_columns": ["Average"],
+        "alternative_columns": ["Hours", "Time", "Correction_Hours"]
+      },
+      "role_similarity": {
+        "expected_name": "MNPS_Role_Groups_by_KSAC_Similarity_FINAL.csv",
+        "description": "Pre-computed KSAC similarity scores between roles",
+        "format_options": ["matrix", "pairwise", "hierarchical"],
+        "use_precomputed": true,
+        "priority": "high"
+      }
+    },
+    "input_files": {
+      "job_descriptions": {
+        "expected_name": "Sample_JDs.csv",
+        "alternative_names": ["Sample JDs.csv", "Job_Descriptions.csv"],
+        "required_columns": ["Job Title"],
+        "preferred_columns": ["Job Title", "Position Summary", "Department", "Grade"]
+      },
+      "classifications": {
+        "expected_name": "Job_Classifications_Batch.csv",
+        "alternative_names": ["Classifications.csv", "Batch_Classifications.csv"],
+        "required_columns": ["major_role_group"],
+        "preferred_columns": ["major_role_group", "sub_role_group", "grouping_justification", "confidence_score"]
+      },
+      "ground_truth": {
+        "expected_name": "ground_truth.csv",
+        "optional": true,
+        "required_columns": ["Job Title", "true_major_group"],
+        "alternative_columns": ["Job Title", "correct_classification", "actual_role", "ground_truth"]
+      }
+    }
+  },
+  "processing_settings": {
+    "validation": {
+      "strict_mode": false,
+      "allow_missing_columns": true,
+      "auto_map_columns": true,
+      "case_sensitive": false
+    },
+    "performance": {
+      "enable_caching": true,
+      "cache_size": 1000,
+      "parallel_processing": false,
+      "batch_size": 50
+    },
+    "quality_checks": {
+      "check_salary_ranges": true,
+      "validate_role_hierarchies": true,
+      "detect_anomalies": true,
+      "flag_borderline_threshold": 0.15
+    }
+  },
+  "mnps_specific_rules": {
+    "roles_without_subgroups": ["Teacher", "Principal", "Director", "Superintendent"],
+    "role_hierarchies": {
+      "Executive": ["Superintendent", "Deputy Superintendent", "Chief", "Executive Director"],
+      "Director": ["Director", "Senior Director", "Associate Director", "Assistant Director"],
+      "Management": ["Manager", "Senior Manager", "Associate Manager", "Assistant Manager"],
+      "Professional": ["Specialist", "Analyst", "Coordinator", "Coach", "Counselor"],
+      "Instructional": ["Teacher", "Instructor", "Librarian", "Coach (Instructional)"],
+      "Support": ["Assistant", "Technician", "Clerk", "Aide"]
+    },
+    "salary_tiers": {
+      "Executive": {"min": 120000, "max": 250000},
+      "Director": {"min": 90000, "max": 150000},
+      "Management": {"min": 70000, "max": 110000},
+      "Professional": {"min": 50000, "max": 90000},
+      "Instructional": {"min": 45000, "max": 85000},
+      "Support": {"min": 30000, "max": 60000}
+    },
+    "subgroup_multipliers": {
+      "I": 0.85,
+      "II": 1.00,
+      "III": 1.20,
+      "Lead": 1.15,
+      "Senior": 1.25
+    }
+  },
+  "analysis_parameters": {
+    "human_baseline": {
+      "min": 88,
+      "typical": 91,
+      "max": 94,
+      "source": "MNPS HR Professional Benchmark Study"
+    },
+    "default_weights": {
+      "ksac_dissimilarity": 0.40,
+      "salary_impact": 0.35,
+      "correction_time": 0.25
+    },
+    "severity_thresholds": {
+      "critical": 0.75,
+      "major": 0.50,
+      "minor": 0.25
+    },
+    "confidence_thresholds": {
+      "high": 0.80,
+      "moderate": 0.60,
+      "low": 0.40
+    },
+    "time_multipliers": {
+      "critical": 10,
+      "major": 5,
+      "minor": 2,
+      "base_hours": 8
+    }
+  },
+  "output_preferences": {
+    "reports": {
+      "include_executive_summary": true,
+      "include_department_breakdown": true,
+      "include_action_items": true,
+      "include_trend_analysis": false
+    },
+    "visualizations": {
+      "dashboard_panels": 15,
+      "color_scheme": "MNPS_blue_gold",
+      "include_heatmaps": true,
+      "include_confusion_matrix": true
+    },
+    "export_formats": {
+      "excel": true,
+      "csv": true,
+      "json": true,
+      "pdf": false
+    }
+  },
+  "metadata": {
+    "version": "8.3",
+    "organization": "Metro Nashville Public Schools",
+    "department": "HR Analytics",
+    "last_updated": "2024",
+    "configuration_type": "production"
+  }
+}
