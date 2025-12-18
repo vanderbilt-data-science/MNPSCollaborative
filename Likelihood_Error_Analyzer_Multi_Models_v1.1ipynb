@@ -1,16 +1,16 @@
 {
-  "cells": [
-    {
-      "cell_type": "markdown",
-      "id": "3c4cc070",
-      "metadata": {
-        "id": "3c4cc070"
-      },
-      "source": [
-        "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/YOUR_REPO/blob/main/Likelihood_Error_Analyzer_Multi_Models.ipynb)\n",
-        "\n",
-        "**📝 Before using:** Update the GitHub URL above with your actual username and repository name.\n",
-        "\n",
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "3c4cc070",
+   "metadata": {
+    "id": "colab-badge"
+   },
+   "source": [
+    "[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/YOUR_USERNAME/YOUR_REPO/blob/main/Likelihood_Error_Analyzer_Multi_Models.ipynb)\n",
+    "\n",
+    "**📝 Before using:** Update the GitHub URL above with your actual username and repository name.\n",
+    "\n",
         "# Likelihood_Error_Analyzer_Multi_Models\n",
         "\n",
         "This notebook computes a **Likelihood of Error Score (0–5)** for each record in **Job_Classifications_Batch.json** by comparing only these inputs:\n",
